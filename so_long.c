@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:45:24 by anollero          #+#    #+#             */
-/*   Updated: 2023/10/18 17:11:34 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:09:58 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@
 int	close_everything(void)
 {
 	exit(0);
+}
+
+int	key_pressed(int keycode, t_so_long_info *info)
+{
+	if (keycode == 13)
+		move(-1, 0, info);
+	if (keycode == 0)
+		move(0, -1, info);
+	if (keycode == 1)
+		move(1, 0, info);
+	if (keycode == 2)
+		move(0, 1, info);
+	if (keycode == 53)
+		close_everything();
+	return (0);
 }
 
 char	**open_map(char *filename)
@@ -71,9 +86,8 @@ int	main(int argc, char *argv[])
 		mlx_key_hook(info->window, key_pressed, info);
 		mlx_hook(info->window, 17, 0, close_everything, NULL);
 		mlx_loop(info->mlx);
-		exit(0);
 	}
 	else
 		ft_putstr_fd("Error\n", 0);
-	return (0);
+	exit(0);
 }

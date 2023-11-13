@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:06:56 by anollero          #+#    #+#             */
-/*   Updated: 2023/10/18 17:11:21 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:13:05 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	images_init(t_so_long_info *info)
 			"resources/sprites/Wall.xpm", &img_size, &img_size);
 	info->floor_img = mlx_xpm_file_to_image(info->mlx,
 			"resources/sprites/Floor.xpm", &img_size, &img_size);
+	info->exit_player_img = mlx_xpm_file_to_image(info->mlx,
+			"resources/sprites/Exit_player.xpm", &img_size, &img_size);
 }
 
 void	draw_cell(int row, int column, t_so_long_info *info)
@@ -46,6 +48,9 @@ void	draw_cell(int row, int column, t_so_long_info *info)
 	if (info->map[row][column] == 'E')
 		mlx_put_image_to_window(info->mlx,
 			info->window, info->exit_img, 64 * column, 64 * row);
+	if (info->map[row][column] == 'K')
+		mlx_put_image_to_window(info->mlx,
+			info->window, info->exit_player_img, 64 * column, 64 * row);
 }
 
 int	draw_map(t_so_long_info *info)
@@ -68,6 +73,16 @@ int	draw_map(t_so_long_info *info)
 	return (0);
 }
 
+void	check_success(t_so_long_info *info, int dirx, int diry)
+{
+	if (info->map[info->posx + dirx][info->posy + diry] == 'E'
+			&& info->nitems == 0)
+	{
+		ft_putstr_fd("FELICIDADES\n", 1);
+		close_everything();
+	}
+}
+
 void	move(int dirx, int diry, t_so_long_info *info)
 {
 	if (info->map[info->posx + dirx][info->posy + diry] != '1')
@@ -75,38 +90,22 @@ void	move(int dirx, int diry, t_so_long_info *info)
 		if (info->map[info->posx + dirx][info->posy + diry] == 'C')
 			info->nitems--;
 		ft_putnbr_fd(++info->moves, 0);
-		ft_putchar_fd('\n', 0);
+		ft_putchar_fd('\n', 1);
 		info->map[info->posx][info->posy] = '0';
 		if (info->in_exit == 1)
 		{
 			info->in_exit = 0;
 			info->map[info->posx][info->posy] = 'E';
 		}
-		if (info->map[info->posx + dirx][info->posy + diry] == 'E')
-			info->in_exit = 1;
-		if (info->map[info->posx + dirx][info->posy + diry] == 'E'
-			&& info->nitems == 0)
-		{
-			ft_putstr_fd("FELICIDADES\n", 0);
-			close_everything();
-		}
+		check_success(info, dirx, diry);
 		info->posx = info->posx + dirx;
 		info->posy = info->posy + diry;
-		info->map[info->posx][info->posy] = 'P';
+		if (info->map[info->posx][info->posy] == 'E')
+		{
+			info->map[info->posx][info->posy] = 'K';
+			info->in_exit = 1;
+		}
+		else
+			info->map[info->posx][info->posy] = 'P';
 	}
-}
-
-int	key_pressed(int keycode, t_so_long_info *info)
-{
-	if (keycode == 13)
-		move(-1, 0, info);
-	if (keycode == 0)
-		move(0, -1, info);
-	if (keycode == 1)
-		move(1, 0, info);
-	if (keycode == 2)
-		move(0, 1, info);
-	if (keycode == 53)
-		close_everything();
-	return (0);
 }

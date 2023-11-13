@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:28:39 by anollero          #+#    #+#             */
-/*   Updated: 2023/10/18 17:13:50 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:10:14 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_so_long_info
 	void	*floor_img;
 	void	*exit_img;
 	void	*colectible_img;
+	void	*exit_player_img;
 	void	*window;
 	int		in_exit;
 	int		colect_check;
@@ -56,5 +57,6 @@ int		check_winnable(char **map, int posx, int posy,
 			t_so_long_info *info);
 int		check_winnable_prep(char **map, int posx, int posy,
 			t_so_long_info *info);
+void	check_success(t_so_long_info *info, int dirx, int diry);
 
 #endif
