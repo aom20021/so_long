@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:06:05 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/15 10:42:17 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:35:43 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ft_strlen_map(char *str)
 	return (count);
 }
 
-void	free_map(char **map)
+void	free_map(char **map, int size)
 {
 	int	count;
 
 	count = 0;
-	while (map[count] != NULL)
+	while (count < size)
 	{
 		free(map[count]);
 		count++;
@@ -94,10 +94,9 @@ int	check_winnable_prep(char **map, int posx, int posy, t_so_long_info *info)
 		auxmap[size] = ft_strdup(map[size]);
 		size++;
 	}
-	auxmap[size] = NULL;
 	info->colect_check = info->nitems;
 	info->exit_check = 0;
 	result = check_winnable(auxmap, posx, posy, info);
-	free_map(auxmap);
+	free_map(auxmap, size);
 	return (result);
 }

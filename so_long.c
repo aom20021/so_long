@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:45:24 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/15 10:35:36 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:38:54 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**open_map(char *filename)
 	if (fd_map == -1)
 		return (NULL);
 	nlines = count_lines(fd_map);
-	close(fd_map);
 	fd_map = open(filename, O_RDONLY);
 	ret = (char **)ft_calloc(nlines + 1, sizeof(char *));
 	while (count <= nlines)
@@ -58,7 +57,15 @@ char	**open_map(char *filename)
 int	init_map(char *filename, t_so_long_info *info)
 {
 	if (!ft_strncmp(filename + (ft_strlen(filename) - 4), ".ber", 4))
+	{
 		info->map = open_map(filename);
+		if (info->map != NULL && (ft_strlen_map(info->map[0]) > 40
+				|| count_lines(open(filename, O_RDONLY)) > 22))
+		{
+			ft_putstr_fd("El mapa es muy grande\n", 2);
+			exit(0);
+		}
+	}
 	else
 		return (0);
 	if (info->map != NULL && check_car(info->map, info)

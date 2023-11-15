@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:02:32 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/15 10:42:10 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:07:46 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	count_lines(int fd_map)
 		free(line);
 		nlines++;
 	}
+	close(fd_map);
 	return (nlines);
 }
 

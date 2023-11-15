@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:28:39 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/15 10:38:07 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:30:53 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_cell(int row, int column, t_so_long_info *info);
 int		draw_map(t_so_long_info *info);
 void	move(int dirx, int diry, t_so_long_info *info);
 int		key_pressed(int keycode, t_so_long_info *info);
-void	free_map(char **map);
+void	free_map(char **map, int size);
 int		check_winnable_aux(char **map, int posx, int posy,
 			t_so_long_info *info);
 int		check_winnable(char **map, int posx, int posy,
