@@ -6,11 +6,31 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:06:05 by anollero          #+#    #+#             */
-/*   Updated: 2023/10/18 17:11:23 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:35:59 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/so_long.h"
+
+int	count_lines(int fd_map)
+{
+	int		nlines;
+	char	*line;
+
+	nlines = 0;
+	line = get_next_line(fd_map);
+	if (line == NULL)
+		return (0);
+	nlines++;
+	free(line);
+	while (line != NULL)
+	{
+		line = get_next_line(fd_map);
+		free(line);
+		nlines++;
+	}
+	return (nlines);
+}
 
 void	free_map(char **map)
 {
@@ -69,6 +89,7 @@ int	check_winnable_prep(char **map, int posx, int posy, t_so_long_info *info)
 	char	**auxmap;
 	int		size;
 	int		exit;
+	int		result;
 
 	size = 0;
 	exit = 0;
@@ -83,7 +104,10 @@ int	check_winnable_prep(char **map, int posx, int posy, t_so_long_info *info)
 		auxmap[size] = ft_strdup(map[size]);
 		size++;
 	}
+	auxmap[size] = NULL;
 	info->colect_check = info->nitems;
 	info->exit_check = 0;
-	return (check_winnable(auxmap, posx, posy, info));
+	result = check_winnable(auxmap, posx, posy, info);
+	free_map(auxmap);
+	return (result);
 }

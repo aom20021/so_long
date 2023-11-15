@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:28:39 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/13 12:10:14 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:38:07 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int		check_winnable(char **map, int posx, int posy,
 int		check_winnable_prep(char **map, int posx, int posy,
 			t_so_long_info *info);
 void	check_success(t_so_long_info *info, int dirx, int diry);
+int		count_lines(int fd_map);
 
 #endif

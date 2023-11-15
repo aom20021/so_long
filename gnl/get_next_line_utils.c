@@ -6,11 +6,12 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:55:19 by anollero          #+#    #+#             */
-/*   Updated: 2023/10/04 13:14:40 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:14:46 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "../libft/libft.h"
 
 size_t	ft_strlen(const char *cadena)
 {
@@ -42,7 +43,7 @@ char	*ft_strdup(const char *s)
 
 	len = ft_strlen(s);
 	count = 0;
-	dupped = (char *)malloc(len * sizeof(char) + 1);
+	dupped = (char *)ft_calloc(len + 1, sizeof(char));
 	if (dupped == 0)
 		return (0);
 	while (s[count] != '\0')

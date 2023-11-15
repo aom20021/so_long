@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:45:24 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/13 12:09:58 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:35:36 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ char	**open_map(char *filename)
 	fd_map = open(filename, O_RDONLY);
 	if (fd_map == -1)
 		return (NULL);
-	while (get_next_line(fd_map) != NULL)
-		nlines++;
+	nlines = count_lines(fd_map);
 	close(fd_map);
 	fd_map = open(filename, O_RDONLY);
 	ret = (char **)ft_calloc(nlines + 1, sizeof(char *));
@@ -89,5 +88,5 @@ int	main(int argc, char *argv[])
 	}
 	else
 		ft_putstr_fd("Error\n", 0);
-	exit(0);
+	close_everything();
 }
