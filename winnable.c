@@ -6,30 +6,20 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:06:05 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/15 10:35:59 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:42:17 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/so_long.h"
 
-int	count_lines(int fd_map)
+int	ft_strlen_map(char *str)
 {
-	int		nlines;
-	char	*line;
+	int	count;
 
-	nlines = 0;
-	line = get_next_line(fd_map);
-	if (line == NULL)
-		return (0);
-	nlines++;
-	free(line);
-	while (line != NULL)
-	{
-		line = get_next_line(fd_map);
-		free(line);
-		nlines++;
-	}
-	return (nlines);
+	count = 0;
+	while (str[count] != '\0' && str[count] != '\n')
+		count++;
+	return (count);
 }
 
 void	free_map(char **map)

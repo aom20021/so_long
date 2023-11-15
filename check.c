@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:02:32 by anollero          #+#    #+#             */
-/*   Updated: 2023/10/30 16:00:54 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:42:10 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,24 @@ int	check_car(char **map, t_so_long_info *info)
 	return (1);
 }
 
-int	ft_strlen_map(char *str)
+int	count_lines(int fd_map)
 {
-	int	count;
+	int		nlines;
+	char	*line;
 
-	count = 0;
-	while (str[count] != '\0' && str[count] != '\n')
-		count++;
-	return (count);
+	nlines = 0;
+	line = get_next_line(fd_map);
+	if (line == NULL)
+		return (0);
+	nlines++;
+	free(line);
+	while (line != NULL)
+	{
+		line = get_next_line(fd_map);
+		free(line);
+		nlines++;
+	}
+	return (nlines);
 }
 
 int	check_rectangle(char **map)
