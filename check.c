@@ -6,7 +6,7 @@
 /*   By: anollero <anollero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:02:32 by anollero          #+#    #+#             */
-/*   Updated: 2023/11/15 13:07:46 by anollero         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:10:33 by anollero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_car(char **map, t_so_long_info *info)
 			{
 				info->posy = posx;
 				info->posx = posy;
-			}	
+			}
 			posx++;
 		}
 		posy++;
